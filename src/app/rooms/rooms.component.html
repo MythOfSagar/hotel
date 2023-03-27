@@ -1,0 +1,10 @@
+<p>rooms works!</p>
+<h1>Welcome to {{hotelName}}</h1>
+
+<button (click)="hideRoomCount()">{{displayRooms ? 'Show Count..' : 'Hide Count..'}}</button>
+
+<div [hidden]="displayRooms">
+    <h2>Below is the number of Rooms that are there in {{hotelName}}</h2>
+    <h2 [innerText]="numberOfRooms"></h2>
+</div>
+
