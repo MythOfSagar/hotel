@@ -1,10 +1,44 @@
 <p>rooms works!</p>
 <h1>Welcome to {{hotelName}}</h1>
 
-<button (click)="hideRoomCount()">{{displayRooms ? 'Show Count..' : 'Hide Count..'}}</button>
+<button (click)="hideRoomCount()">{{displayRooms ? 'Show Count..' : 'Show List..'}}</button>
 
 <div [hidden]="displayRooms">
     <h2>Below is the number of Rooms that are there in {{hotelName}}</h2>
     <h2 [innerText]="numberOfRooms"></h2>
+</div>
+
+<div *ngIf="displayRooms">
+    ngIf Directives
+    <div >
+        <table>
+            <tr>
+                <th>Index</th>
+                <th>Even/Odd</th>
+                <th>Room Number</th>
+                <th>Room Type</th>
+                <th>Room Price</th>
+                <th>Amenities</th>
+                <th>CheckIN</th>
+            </tr>
+            <tr *ngFor="
+            let room of roomList;
+            let e=even;
+            let o=odd;
+            let i=index;
+            "
+            [ngClass]="e ? 'Even' : 'Odd'"
+            [ngStyle]="{color: e ? 'black' : 'yellow'}"
+            >
+                <td>{{i}}</td>
+                <td>{{e ? 'Even' : 'Odd'}}</td>
+                <td>{{room.roomNumber}}</td>
+                <td>{{room.type}}</td>
+                <td>{{room.price}}</td>
+                <td>{{room.amenities}}</td>
+                <td>{{room.checkInTime}}</td>
+            </tr>
+        </table>
+    </div>
 </div>
 
