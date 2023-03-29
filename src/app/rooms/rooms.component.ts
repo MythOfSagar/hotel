@@ -1,4 +1,13 @@
-import { Component } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
+
+import { HeaderComponent } from '../header/header.component';
 import { RoomList, Rooms } from './rooms';
 
 @Component({
@@ -6,7 +15,7 @@ import { RoomList, Rooms } from './rooms';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
 })
-export class RoomsComponent {
+export class RoomsComponent implements AfterViewInit, OnDestroy {
   hotelName = 'InterPol Hotel';
   numberOfRooms = 70;
   displayRooms = true;
@@ -23,7 +32,34 @@ export class RoomsComponent {
     console.log(room);
   }
 
-  title="Cats"
+  title = 'Cats';
+
+  @ViewChild(HeaderComponent, { static: true })
+  headerComponent!: HeaderComponent;
+
+  // By Default static is false
+  // Static false for asynchromous requests
+
+  //@ViewChild acces only one elemtnt if there are multiple Header components, and that is First One
+  //@ViewChildren will have acces to all Header components
+  //@ViewChildren will have static as false and it can-not be changed.
+
+  @ViewChildren(HeaderComponent)
+  headerChildrenComponents!: QueryList<HeaderComponent>;
+
+  ngAfterViewInit() {
+    this.headerComponent.title = 'Changed Title';
+
+    this.headerChildrenComponents.forEach((headerComponent, i) => {
+      if (i !== 0) {
+        headerComponent.title = `Header Componet ${i}`;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    console.log('Room Component has been destroyed');
+  }
 
   roomList: RoomList[] = [
     {
@@ -65,6 +101,6 @@ export class RoomsComponent {
     };
 
     //this.roomList.push(newRoom) means mutable
-    this.roomList=[...this.roomList,newRoom]; //immutable
+    this.roomList = [...this.roomList, newRoom]; //immutable
   }
 }

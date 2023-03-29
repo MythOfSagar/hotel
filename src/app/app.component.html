@@ -11,10 +11,27 @@
   <div [ngSwitch]="role">
     <div *ngSwitchCase="'User'">Welcome User</div>
     <div *ngSwitchCase="'Admin'">
-      <app-rooms></app-rooms>
+      <div>
+        <ng-template #user></ng-template>
+        <!-- ng-template itself helps rendering other templates -->
+      </div>
     </div>
     <div *ngSwitchDefault>You are not Authorized</div>
   </div>
+
+  <button (click)="changeRole()">Click Me to change Role</button>
+
+  <h1>Below Content rendered according to their defined order placed in ngContainer</h1>
+
+  <app-container>
+    <app-rooms></app-rooms>
+    <app-employee></app-employee>
+    <h2>ng Content</h2>
+  </app-container>
+
+
+
+
 
 </div>
 
