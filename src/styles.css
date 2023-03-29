@@ -3,3 +3,9 @@ body{
     background-color: black;
     color: white;
 }
+.Even{
+    background-color: red;
+}
+.Odd{
+    background-color: blue
+}
