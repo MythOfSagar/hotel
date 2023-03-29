@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css'],
 })
+
 export class EmployeeComponent {
   empName: string = 'Sagar';
 }

@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 import { HeaderComponent } from '../header/header.component';
-import { RoomList, Rooms } from './rooms';
+import { SingleRoom, Rooms } from './rooms';
 
 @Component({
   selector: 'app-rooms',
@@ -19,7 +19,7 @@ export class RoomsComponent implements AfterViewInit, OnDestroy {
   hotelName = 'InterPol Hotel';
   numberOfRooms = 70;
   displayRooms = true;
-  hideRoomCount = () => {
+  hideTable = () => {
     this.displayRooms = !this.displayRooms;
   };
   rooms: Rooms = {
@@ -28,7 +28,7 @@ export class RoomsComponent implements AfterViewInit, OnDestroy {
     bookedRooms: 8,
   };
 
-  selectRoom(room: RoomList) {
+  selectRoom(room: SingleRoom) {
     console.log(room);
   }
 
@@ -61,7 +61,7 @@ export class RoomsComponent implements AfterViewInit, OnDestroy {
     console.log('Room Component has been destroyed');
   }
 
-  roomList: RoomList[] = [
+  roomList: SingleRoom[] = [
     {
       type: 'A',
       amenities: 'ac, washing machine',
@@ -88,7 +88,7 @@ export class RoomsComponent implements AfterViewInit, OnDestroy {
 
   addRoom() {
     console.log('adding room');
-    const newRoom: RoomList = {
+    const newRoom: SingleRoom = {
       type: 'B',
       amenities: 'non ac, television',
       roomNumber: 22,

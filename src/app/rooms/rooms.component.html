@@ -7,14 +7,13 @@
 <app-header></app-header>
 
 
-<button (click)="hideRoomCount()">{{displayRooms ? 'Hide Table..' : 'Show Table..'}}</button>
+<button (click)="hideTable()">{{displayRooms ? 'Hide Table..' : 'Show Table..'}}</button>
 
 <div *ngIf="displayRooms">
     <h2>Below is the number of Rooms that are there in {{hotelName}}</h2>
+    
     <h2 [innerText]="numberOfRooms"></h2>
-</div>
 
-<div *ngIf="displayRooms">
     <app-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
 </div>
 

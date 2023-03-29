@@ -16,7 +16,10 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     const componentRef = this.vcr.createComponent(RoomsComponent);
+    
     componentRef.instance.numberOfRooms=177
+
+
     console.log(componentRef.instance,'v')
   }
 
