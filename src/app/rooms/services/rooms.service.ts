@@ -21,7 +21,7 @@ export class RoomsService {
     @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
     private http: HttpClient
   ) {
-    console.log('url', this.config);
+    console.log('url', this.config.apiEndPoint);
 
     //Accessing url from a Value Provider..
   }
@@ -29,12 +29,12 @@ export class RoomsService {
   roomList: SingleRoom[] = [];
 
   getRooms() {
-    return this.http.get<SingleRoom[]>('https://data-vercel.vercel.app/hotels');
+    return this.http.get<SingleRoom[]>(`${this.config.apiEndPoint}/hotels`);
   }
 
   addRoom(room: SingleRoom) {
     return this.http.post<void>(
-      'https://data-vercel.vercel.app/hotels',
+      '${this.config.apiEndPoint}/hotels',
       room,
       httpOptions
     );
@@ -43,7 +43,7 @@ export class RoomsService {
   editRoom(id: string,editedData:any) {
     
     return this.http.patch<void>(
-      `https://data-vercel.vercel.app/hotels/${id}`,
+      `${this.config.apiEndPoint}/hotels/${id}`,
       editedData,
       httpOptions
     );
@@ -52,7 +52,7 @@ export class RoomsService {
   deleteRoom(id: string) {
     
     return this.http.delete<void>(
-      `https://data-vercel.vercel.app/hotels/${id}`,
+      `${this.config.apiEndPoint}/hotels/${id}`,
       httpOptions
     );
   }

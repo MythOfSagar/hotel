@@ -1,4 +1,4 @@
 export const environment={
     production :false,
-    apiEndPoint:'http://localhost:4200'
+    apiEndPoint:'https://data-vercel.vercel.app'
 }
