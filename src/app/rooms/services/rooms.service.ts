@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { AppConfig } from 'src/app/AppConfig/appConfig.interface';
 import { APP_SERVICE_CONFIG } from 'src/app/AppConfig/appConfig.service';
@@ -40,8 +40,7 @@ export class RoomsService {
     );
   }
 
-  editRoom(id: string,editedData:any) {
-    
+  editRoom(id: string, editedData: any) {
     return this.http.patch<void>(
       `${this.config.apiEndPoint}/hotels/${id}`,
       editedData,
@@ -50,11 +49,21 @@ export class RoomsService {
   }
 
   deleteRoom(id: string) {
-    
     return this.http.delete<void>(
       `${this.config.apiEndPoint}/hotels/${id}`,
       httpOptions
     );
   }
 
+  getPhotos() {
+    const request = new HttpRequest(
+      'GET',
+      'https://jsonplaceholder.typicode.com/photos',
+      {
+        reportProgress: true,
+      }
+    );
+
+    return this.http.request(request);
+  }
 }

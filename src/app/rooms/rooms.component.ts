@@ -1,3 +1,4 @@
+import { HttpEventType } from '@angular/common/http';
 import {
   AfterViewInit,
   Component,
@@ -39,9 +40,38 @@ export class RoomsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   roomList: SingleRoom[] = [];
 
+  totalBytes: number = 0;
+
   constructor(private roomsService: RoomsService) {}
 
   ngOnInit(): void {
+    this.roomsService.getPhotos().subscribe((event) => {
+      switch (event.type) {
+        case HttpEventType.Sent: {
+          console.log('Request Made');
+          break;
+        }
+        case HttpEventType.ResponseHeader: {
+          console.log('Request Success');
+          break;
+        }
+
+        case HttpEventType.DownloadProgress: {
+          this.totalBytes += event.loaded;
+          console.log(`Bytes Downloaded: ${this.totalBytes}`);
+          break;
+        }
+
+        case HttpEventType.Response: {
+          console.log(event.body);
+          break;
+        }
+        default: {
+          console.log(true);
+        }
+      }
+    });
+
     this.roomsService.getRooms().subscribe((rooms) => {
       this.roomList = rooms;
     });
@@ -119,8 +149,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  deleteRoom(id: string){
-    this.roomList= this.roomList.filter(room=>room.id !== id)
+  deleteRoom(id: string) {
+    this.roomList = this.roomList.filter((room) => room.id !== id);
 
     this.roomsService.deleteRoom(id).subscribe((data) => {
       console.log(data);
