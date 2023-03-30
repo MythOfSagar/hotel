@@ -5,12 +5,13 @@ export interface Rooms {
 }
 
 export interface SingleRoom {
+  id:string
   type: string;
   amenities: string;
   roomNumber:number;
   rating: number;
   price: number;
   photo: string;
-  checkInTime:Date;
-  checkOutTime:Date;
+  checkInTime:string;
+  checkOutTime:string;
 }
