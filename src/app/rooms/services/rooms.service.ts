@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { AppConfig } from 'src/app/AppConfig/appConfig.interface';
+import {APP_SERVICE_CONFIG} from 'src/app/AppConfig/appConfig.service'
 import { SingleRoom } from '../rooms';
 
 @Injectable({
@@ -9,7 +11,11 @@ import { SingleRoom } from '../rooms';
 
 export class RoomsService {
 
-  constructor() { }
+  constructor(@Inject(APP_SERVICE_CONFIG) private config:AppConfig) { 
+    console.log('url',this.config)
+
+    //Accessing url from a Value Provider..
+  }
 
   roomList: SingleRoom[] = [
     {

@@ -8,6 +8,7 @@ import { RoomsListComponent } from './rooms/rooms-list/rooms-list.component';
 import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appConfig.service';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,15 @@ import { EmployeeComponent } from './employee/employee.component';
     RoomsListComponent,
     HeaderComponent,
     ContainerComponent,
-    EmployeeComponent
+    EmployeeComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
+  imports: [BrowserModule, AppRoutingModule],
+  providers: [
+    {
+      provide: APP_SERVICE_CONFIG,
+      useValue: APP_CONFIG,
+    },
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

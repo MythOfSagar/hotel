@@ -1,4 +1,11 @@
-import { AfterViewInit, Component,  ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import { localStorageToken } from './localstorage.token';
 import { RoomsComponent } from './rooms/rooms.component';
 
 @Component({
@@ -14,13 +21,14 @@ export class AppComponent implements AfterViewInit {
 
   //AfterViewInit because by default static is false
 
+  constructor(@Inject(localStorageToken) private localStorage: Storage) {}
+
   ngAfterViewInit() {
     const componentRef = this.vcr.createComponent(RoomsComponent);
-    
-    componentRef.instance.numberOfRooms=177
 
-
-    console.log(componentRef.instance,'v')
+    componentRef.instance.numberOfRooms = 177;
+    this.localStorage.setItem('NOTE', 'Rooms are available');
+    console.log(componentRef.instance, 'v');
   }
 
   changeRole() {
