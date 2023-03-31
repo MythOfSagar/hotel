@@ -33,7 +33,8 @@ export class RoomsService {
     .get<SingleRoom[]>(`${this.config.apiEndPoint}/hotels`)
     .pipe(shareReplay(1));
 
-    //By using getRooms$ instead of getRooms we can avoid repeatative API calls for same Data...
+    //By using rxjs shareReplay operator
+    //and using getRooms$ instead of getRooms we can avoid repeatative API calls for same Data...
 
   getRooms() {
     return this.http.get<SingleRoom[]>(`${this.config.apiEndPoint}/hotels`);

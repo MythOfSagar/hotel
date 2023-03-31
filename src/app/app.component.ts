@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { localStorageToken } from './localstorage.token';
 import { RoomsComponent } from './rooms/rooms.component';
+import { InitService } from './init.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,13 @@ export class AppComponent implements AfterViewInit {
 
   //AfterViewInit because by default static is false
 
-  constructor(@Inject(localStorageToken) private localStorage: Storage) {}
+  constructor(
+    @Inject(localStorageToken) private localStorage: Storage,
+    private initService: InitService
+  ) {
+    console.log(initService.config);
+    //Getting Data before the app has been initialized...
+  }
 
   ngAfterViewInit() {
     const componentRef = this.vcr.createComponent(RoomsComponent);
