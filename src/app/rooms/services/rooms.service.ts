@@ -4,6 +4,7 @@ import { AppConfig } from 'src/app/AppConfig/appConfig.interface';
 import { APP_SERVICE_CONFIG } from 'src/app/AppConfig/appConfig.service';
 import { HttpHeaders } from '@angular/common/http';
 import { SingleRoom } from '../rooms';
+import { shareReplay } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -28,13 +29,19 @@ export class RoomsService {
 
   roomList: SingleRoom[] = [];
 
+  getRooms$ = this.http
+    .get<SingleRoom[]>(`${this.config.apiEndPoint}/hotels`)
+    .pipe(shareReplay(1));
+
+    //By using getRooms$ instead of getRooms we can avoid repeatative API calls for same Data...
+
   getRooms() {
     return this.http.get<SingleRoom[]>(`${this.config.apiEndPoint}/hotels`);
   }
 
   addRoom(room: SingleRoom) {
     return this.http.post<void>(
-      '${this.config.apiEndPoint}/hotels',
+      `${this.config.apiEndPoint}/hotels`,
       room,
       httpOptions
     );

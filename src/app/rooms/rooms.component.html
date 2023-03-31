@@ -8,16 +8,29 @@
 
 
     <button (click)="hideTable()">{{displayRooms ? 'Hide Table..' : 'Show Table..'}}</button>
-
+     
     <div *ngIf="displayRooms">
         <h2>Below is the number of Rooms that are there in {{hotelName}}</h2>
 
+        <!-- <h3>{{getError$ | async}}</h3> -->
+        <!-- Displaying Error Message -->
+        
         <h2 [innerText]="numberOfRooms"></h2>
+        <h3>Secret Number of Rooms: {{roomsCount$ | async}}</h3>
+        <div *ngIf="rooms$ | async as allrooms">
+            <!-- Because of  this way, the manual subscription, unsubscription get's automated
+            This has been implemented using Async Pipes -->
+        <app-rooms-list 
+        [rooms]="allrooms" 
+        [title]="title" 
+        (selectedRoom)="selectRoom($event)"></app-rooms-list>
 
-        <app-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+    
+ 
+    </div>
     </div>
 
-    <div>
+    <div> 
         <button (click)="addRoom()">Add Room</button>
 
         <button (click)="editRoom('1')">Edit 1st Room</button>

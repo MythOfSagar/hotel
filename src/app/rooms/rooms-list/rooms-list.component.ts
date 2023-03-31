@@ -8,7 +8,7 @@ import { SingleRoom } from '../rooms';
   changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class RoomsListComponent implements OnInit ,OnChanges{
-  @Input() rooms: SingleRoom[] = [];
+  @Input() rooms: SingleRoom[] | null= [];
   @Input() title: string= '';
 
   @Output() selectedRoom = new EventEmitter<SingleRoom>();

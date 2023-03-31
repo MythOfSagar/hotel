@@ -8,6 +8,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
+import { catchError, map, Subject, Subscription } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
 import { HeaderComponent } from '../header/header.component';
@@ -40,7 +41,32 @@ export class RoomsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   roomList: SingleRoom[] = [];
 
+  subscription!: Subscription;
+
   totalBytes: number = 0;
+
+  roomsCount$ =this.roomsService.getRooms$.pipe(
+    map((rooms) => rooms.length),
+  )
+ //Modified data using rxjs Map operators...
+
+
+  error$ = new Subject<string>();
+
+  getError$ = this.error$.asObservable();
+
+  rooms$ = this.roomsService.getRooms$.pipe(
+    catchError((err) => {
+      this.error$.next(err.message);
+      // Error Handling Must not be done in component for better Performance
+      // Error Handling Should be done through Service
+
+      console.log(err, 'Error catch through catchError Operator');
+
+      return [];
+    })
+  );
+  // Because of  this way, the manual subscription, unsubscription get's automated
 
   constructor(private roomsService: RoomsService) {}
 
@@ -72,9 +98,13 @@ export class RoomsComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    this.roomsService.getRooms().subscribe((rooms) => {
-      this.roomList = rooms;
-    });
+    //Holding subscription for getting Rooms...
+
+    // this.subscription=this.roomsService.getRooms$.subscribe((rooms) => {
+    //   this.roomList = rooms;
+    // });
+
+    // Here the subscription is made manually and also manually UnSubscribed...
   }
 
   @ViewChild(HeaderComponent, { static: true })
@@ -102,6 +132,13 @@ export class RoomsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('Room Component has been destroyed');
+    // if(this.subscription)
+    // {
+    //   this.subscription.unsubscribe()
+    // }
+    //
+    //Commented above 5 line's of code because subscription, and Unsubscription
+    // has been made automated by using AsyncPipes
   }
 
   addRoom() {
