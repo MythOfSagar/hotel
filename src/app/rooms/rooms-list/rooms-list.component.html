@@ -31,7 +31,8 @@
                 <td>{{room.price | currency : 'INR'}}</td>
                 <td>{{room.amenities | titlecase}}</td>
                 <td>{{room.checkInTime | date : 'dd/MM/yyyy'}}</td>
-                <button (click)="selectRoom(room)">Select</button>
+                <td><button [routerLink]="['/rooms',room.id]">Book Room</button></td>
+                <!-- <button (click)="selectRoom(room)">Select</button> -->
             </tr>
         </table>
     </div>

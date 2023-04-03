@@ -11,6 +11,16 @@ import { EmployeeComponent } from './employee/employee.component';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appConfig.service';
 import { RequestInterceptor } from './rooms/request.interceptor';
 import { InitService } from './init.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { RoomsBookingComponent } from './rooms/rooms-booking/rooms-booking.component';
 
 function initFactory(initService:InitService){
 return ()=>initService.init()
@@ -24,8 +34,11 @@ return ()=>initService.init()
     HeaderComponent,
     ContainerComponent,
     EmployeeComponent,
+    NavbarComponent,
+    NotFoundComponent,
+    RoomsBookingComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule],
   providers: [
     {
       provide: APP_SERVICE_CONFIG,
