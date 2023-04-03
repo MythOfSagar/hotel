@@ -1,0 +1,37 @@
+{{roomsForm.pristine | json}}
+<!-- Pristine state means the state prior to actual interaction of user with the form... -->
+
+{{roomsForm.dirty | json}}
+<!-- Dirty state means the interaction of user has started with the form... -->
+
+{{room | json}}
+{{roomsForm.valid | json}}
+
+<form class="form-group" #roomsForm="ngForm" (ngSubmit)="addRoom(roomsForm)">
+    <input class="form-control" type="text" placeholder="type" name="type" [(ngModel)]="room.type">
+    <br>
+    <input type="text"
+     placeholder="amenities" 
+     name="amenities" 
+     [(ngModel)]="room.amenities" 
+     minlength="5" 
+     maxlength="15"
+     #roomamenities="ngModel"
+     required>
+     <h4 *ngIf="roomsForm.dirty && roomamenities.errors">Required Atleast 5 characters...</h4>
+
+    <br>
+    <input type="number" placeholder="roomNumber" name="roomNumber" [(ngModel)]="room.roomNumber">
+    <br>
+    <input type="number" placeholder="rating" min="1" max="5" name="rating" [(ngModel)]="room.rating">
+    <br>
+    <input type="number" placeholder="priceOfRoom" name="priceOfRoom" [(ngModel)]="room.price">
+    <br>
+    <input type="text" placeholder="photo" name="photo" [(ngModel)]="room.photo">
+    <br>
+    <input type="datetime" placeholder="checkInTime" name="checkInTime" [(ngModel)]="room.checkInTime">
+    <br>
+    <input type="datetime" placeholder="checkOutTime" name="checkOutTime" [(ngModel)]="room.checkOutTime">
+    <br>
+    <input [disabled]="roomsForm.invalid" type="submit">
+</form>
