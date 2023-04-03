@@ -1,5 +1,5 @@
 <div>
-<h3>{{title}}</h3>
+<h3 [appHover]="'3px solid yellow'">{{title}}</h3>
    
     <div >
         <table>
@@ -20,6 +20,7 @@
             let o=odd;
             let i=index;
             "
+          
             [ngClass]="e ? 'Even' : 'Odd'"
             [ngStyle]="{color: e ? 'black' : 'yellow'}"
             >
