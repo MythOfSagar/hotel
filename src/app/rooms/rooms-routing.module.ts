@@ -5,7 +5,13 @@ import { RoomAddComponent } from './room-add/room-add.component';
 import { RoomsComponent } from './rooms.component';
 
 const routes: Routes = [
-  { path: 'rooms', component: RoomsComponent },
+  {
+    path: 'rooms',
+    component: RoomsComponent,
+    //children: [{ path: ':id', component: RoomsBookingComponent }],
+    //In above children Array, always keep dynamic routing component at the last,
+    //For Nested Routing...
+  },
   { path: 'rooms/add', component: RoomAddComponent },
   { path: 'rooms/:id', component: RoomsBookingComponent },
 ];
