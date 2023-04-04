@@ -24,6 +24,8 @@ import { RoomsBookingComponent } from './rooms/rooms-booking/rooms-booking.compo
 import { RoomAddComponent } from './rooms/room-add/room-add.component';
 import { FormsModule } from '@angular/forms';
 import { HoverDirective } from './hover.directive';
+import { ImagevalidatorDirective } from './imagevalidator/imagevalidator.directive';
+
 
 function initFactory(initService: InitService) {
   return () => initService.init();
@@ -42,6 +44,8 @@ function initFactory(initService: InitService) {
     RoomsBookingComponent,
     RoomAddComponent,
     HoverDirective,
+    ImagevalidatorDirective,
+
   ],
   imports: [
     BrowserModule,

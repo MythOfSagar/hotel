@@ -1,4 +1,4 @@
-import { Component, OnInit, Self } from '@angular/core';
+import { Component, Self } from '@angular/core';
 import { SingleRoom } from '../rooms/rooms';
 import { RoomsService } from '../rooms/services/rooms.service';
 
@@ -8,7 +8,7 @@ import { RoomsService } from '../rooms/services/rooms.service';
   styleUrls: ['./employee.component.css'],
   providers: [RoomsService], //Another instance of RoomsService is getting created.
 })
-export class EmployeeComponent implements OnInit {
+export class EmployeeComponent {
   empName: string = 'Sagar';
 
   roomList: SingleRoom[] = [];
@@ -24,8 +24,4 @@ export class EmployeeComponent implements OnInit {
 
   // @Host Decorator means the creation of instance for parent which will be
   // further used by the childs...
-
-  ngOnInit(): void {
-    console.log(this.roomsService.getRooms(), '56765765');
-  }
 }

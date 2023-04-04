@@ -10,15 +10,9 @@
 <form class="form-group" #roomsForm="ngForm" (ngSubmit)="addRoom(roomsForm)">
     <input class="form-control" type="text" placeholder="type" name="type" [(ngModel)]="room.type">
     <br>
-    <input type="text"
-     placeholder="amenities" 
-     name="amenities" 
-     [(ngModel)]="room.amenities" 
-     minlength="5" 
-     maxlength="15"
-     #roomamenities="ngModel"
-     required>
-     <h4 *ngIf="roomsForm.dirty && roomamenities.errors">Required Atleast 5 characters...</h4>
+    <input type="text" placeholder="amenities" name="amenities" [(ngModel)]="room.amenities" minlength="5"
+        maxlength="15" #roomamenities="ngModel" required>
+    <h4 *ngIf="roomsForm.dirty && roomamenities.errors">Required Atleast 5 characters...</h4>
 
     <br>
     <input type="number" placeholder="roomNumber" name="roomNumber" [(ngModel)]="room.roomNumber">
@@ -27,7 +21,8 @@
     <br>
     <input type="number" placeholder="priceOfRoom" name="priceOfRoom" [(ngModel)]="room.price">
     <br>
-    <input type="text" placeholder="photo" name="photo" [(ngModel)]="room.photo">
+    <input type="text" #url="ngModel" appImagevalidator placeholder="photo" name="photo" [(ngModel)]="room.photo">
+    <div>{{url.errors | json}}</div>
     <br>
     <input type="datetime" placeholder="checkInTime" name="checkInTime" [(ngModel)]="room.checkInTime">
     <br>
