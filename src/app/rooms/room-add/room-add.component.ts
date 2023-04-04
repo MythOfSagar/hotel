@@ -1,20 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SingleRoom } from '../rooms';
 import { v4 as uuid } from 'uuid';
 import { RoomsService } from '../services/rooms.service';
 import { NgForm } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-room-add',
   templateUrl: './room-add.component.html',
   styleUrls: ['./room-add.component.css'],
 })
-export class RoomAddComponent implements OnInit {
-
- 
+export class RoomAddComponent {
   room: SingleRoom = {
-    id:uuid(),
+    id: uuid(),
     type: '',
     amenities: '',
     roomNumber: 0,
@@ -23,20 +21,17 @@ export class RoomAddComponent implements OnInit {
     photo: '',
     checkInTime: '',
     checkOutTime: '',
-  }
+  };
 
-  ngOnInit(): void {
+  constructor(private roomsService: RoomsService, private route: Router) {}
+
+  addRoom(roomsForm: NgForm) {
+    console.log(this.room);
+    roomsForm.resetForm(this.room);
+    this.roomsService.addRoom(this.room).subscribe((data) => {
+      console.log(data);
     
+    });
+    this.route.navigateByUrl('/employee');
   }
-
- constructor(private roomsService: RoomsService){}
-
- addRoom(roomsForm:NgForm) {
- console.log(this.room)
-  roomsForm.resetForm(this.room)
-  this.roomsService.addRoom(this.room).subscribe((data) => {
-    console.log(data);
-  });
-  // this.roomList = [...this.roomList, newRoom];
-}
 }
