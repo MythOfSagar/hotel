@@ -6,7 +6,9 @@ import { RoomsComponent } from './rooms.component';
 
 const routes: Routes = [
   {
-    path: 'rooms',
+    //path: 'rooms', //For normal loading of Room Module
+      path: '',      //For Lazy Loading of Room Module
+
     component: RoomsComponent,
     //children: [{ path: ':id', component: RoomsBookingComponent }],
     //In above children Array, always keep dynamic routing component at the last,

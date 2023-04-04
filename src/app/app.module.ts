@@ -23,11 +23,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 //import { RoomsBookingComponent } from './rooms/rooms-booking/rooms-booking.component';
 //import { RoomAddComponent } from './rooms/room-add/room-add.component';
 import { FormsModule } from '@angular/forms';
-import { HoverDirective } from './hover.directive';
+//import { HoverDirective } from './hover.directive';
 import { ImagevalidatorDirective } from './imagevalidator/imagevalidator.directive';
-import { RoomsModule } from './rooms/rooms.module';
+//import { RoomsModule } from './rooms/rooms.module';
 //import { HeaderModule } from './header/header.module';
-
 
 function initFactory(initService: InitService) {
   return () => initService.init();
@@ -36,21 +35,18 @@ function initFactory(initService: InitService) {
 @NgModule({
   declarations: [
     AppComponent,
-   
-   
+
     ContainerComponent,
     EmployeeComponent,
     NavbarComponent,
     NotFoundComponent,
-   
-    
-    ImagevalidatorDirective,
 
+    ImagevalidatorDirective,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    RoomsModule,
+   
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -59,7 +55,7 @@ function initFactory(initService: InitService) {
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
   ],
   providers: [
     {
