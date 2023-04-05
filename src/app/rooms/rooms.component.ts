@@ -14,6 +14,7 @@ import { v4 as uuid } from 'uuid';
 import { HeaderComponent } from '../header/header.component';
 import { SingleRoom, Rooms } from './rooms';
 import { RoomsService } from './services/rooms.service';
+import { ConfigService } from '../services/config.service';
 
 @Component({
   selector: 'app-rooms',
@@ -45,11 +46,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   totalBytes: number = 0;
 
-  roomsCount$ =this.roomsService.getRooms$.pipe(
-    map((rooms) => rooms.length),
-  )
- //Modified data using rxjs Map operators...
-
+  roomsCount$ = this.roomsService.getRooms$.pipe(map((rooms) => rooms.length));
+  //Modified data using rxjs Map operators...
 
   error$ = new Subject<string>();
 
@@ -68,7 +66,10 @@ export class RoomsComponent implements OnInit, AfterViewInit, OnDestroy {
   );
   // Because of  this way, the manual subscription, unsubscription get's automated
 
-  constructor(private roomsService: RoomsService) {}
+  constructor(
+    private roomsService: RoomsService,
+    private configService: ConfigService
+  ) {}
 
   ngOnInit(): void {
     this.roomsService.getPhotos().subscribe((event) => {

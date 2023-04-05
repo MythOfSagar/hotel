@@ -9,6 +9,7 @@ import { RoomAddComponent } from './room-add/room-add.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderModule } from '../header/header.module';
 import { HoverDirective } from '../hover.directive';
+import { RouteConfigToken } from '../services/routeConfig.service';
 //import { HeaderComponent } from '../header/header.component';
 
 @NgModule({
@@ -20,5 +21,9 @@ import { HoverDirective } from '../hover.directive';
     HoverDirective
   ],
   imports: [CommonModule, RoomsRoutingModule, FormsModule, HeaderModule],
+  providers:[{
+    provide: RouteConfigToken,
+    useValue: { title: 'ROOMS' },
+  }]
 })
 export class RoomsModule {}

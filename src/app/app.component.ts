@@ -8,6 +8,7 @@ import {
 import { localStorageToken } from './localstorage.token';
 import { RoomsComponent } from './rooms/rooms.component';
 import { InitService } from './init.service';
+import { ConfigService } from './services/config.service';
 
 @Component({
   selector: 'app-root',
@@ -24,10 +25,11 @@ export class AppComponent implements AfterViewInit {
 
   constructor(
     @Inject(localStorageToken) private localStorage: Storage,
-    private initService: InitService
+    private initService: InitService,
+    private configService: ConfigService
   ) {
-    console.log(initService.config);
-    //Getting Data before the app has been initialized...
+    console.log(initService.config,this.configService,'configService');
+    //Getting Data before the app has been initialized using initService...
   }
 
   ngAfterViewInit() {

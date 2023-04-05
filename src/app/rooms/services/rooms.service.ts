@@ -14,6 +14,7 @@ const httpOptions = {
 
 @Injectable({
   providedIn: 'root',
+
 })
 
 // providedIn: 'root' It provides single instance of Service across all Components.

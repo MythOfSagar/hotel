@@ -25,6 +25,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { FormsModule } from '@angular/forms';
 //import { HoverDirective } from './hover.directive';
 import { ImagevalidatorDirective } from './imagevalidator/imagevalidator.directive';
+import { RouteConfigToken } from './services/routeConfig.service';
 //import { RoomsModule } from './rooms/rooms.module';
 //import { HeaderModule } from './header/header.module';
 
@@ -46,7 +47,7 @@ function initFactory(initService: InitService) {
   imports: [
     BrowserModule,
     FormsModule,
-   
+
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -61,6 +62,10 @@ function initFactory(initService: InitService) {
     {
       provide: APP_SERVICE_CONFIG,
       useValue: APP_CONFIG,
+    },
+    {
+      provide: RouteConfigToken,
+      useValue: { title: 'HOME' },
     },
     {
       provide: HTTP_INTERCEPTORS,
